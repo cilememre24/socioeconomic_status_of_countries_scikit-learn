@@ -43,7 +43,10 @@ Stacked bar plot 2,
 Plotting pie-chart,
 Plotting the worst 10 countries
 
--STRUCTURE: These files are in the same directory: Country-data.csv, GLOB.SES.csv, leon_final_project.py, README.md
+-STRUCTURE: 
+-These files are in the same directory: Country-data.csv, GLOB.SES.csv, leon_final_project.py, README.md, Report file
+-Inside the Report file is Report.tex and png files
+    
 
 -LANGUAGE, VERSION AND MAIN FILE: Python, python3, leon_final_project.py
 
