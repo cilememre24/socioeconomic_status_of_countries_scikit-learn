@@ -392,3 +392,9 @@ print(worst_top10)
 
 #Getting the SES data
 year_data = pd.read_csv("GLOB.SES.csv",encoding='ISO-8859-1')
+
+recent_data = year_data.loc[year_data["year"]==2010]
+
+growth = []
+for i in recent_data["country"]:
+    lowest = year_data[year_data['country']==i].nsmallest(1, "SES")["SES"].values
