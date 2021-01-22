@@ -361,3 +361,16 @@ sns.set(rc={'figure.figsize':(8,8)})
 plt.savefig('top10.pdf')
 plt.close()
 
+#----------------------------To perform Hierarchical clustering----------------------------
+
+from scipy.cluster.hierarchy import linkage
+from scipy.cluster.hierarchy import dendrogram
+from scipy.cluster.hierarchy import cut_tree
+
+mergings = linkage(data_scaled, method="complete", metric='euclidean')
+dendrogram(mergings)
+plt.title('Hierarchical Clustering Dendrogram - Complete linkage',fontsize=20)
+plt.xlabel('Country',fontsize=20)
+plt.ylabel('Values',fontsize=20)
+plt.savefig('hierarchical.pdf')
+plt.close()
