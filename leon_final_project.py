@@ -395,6 +395,27 @@ year_data = pd.read_csv("GLOB.SES.csv",encoding='ISO-8859-1')
 
 recent_data = year_data.loc[year_data["year"]==2010]
 
+
+
+
+
 growth = []
 for i in recent_data["country"]:
     lowest = year_data[year_data['country']==i].nsmallest(1, "SES")["SES"].values
+    g = recent_data["SES"].loc[recent_data['country'] == i].values - lowest
+    growth.append(g)
+    
+growth = np.array(growth, dtype=float)
+recent_data["SES Growth"] = growth
+
+cluster_labels2=[]
+num_clusters2 = [2, 3, 4, 5, 6, 7, 8]
+
+for num_cluster in num_clusters2:
+    kmeans2 = KMeans(n_clusters=num_cluster,max_iter=50)
+    kmeans2.fit(last_recent_data)
+    
+    cluster_labels2 = kmeans2.labels_
+
+    silhouette_avg2 = silhouette_score(last_recent_data, cluster_labels2)
+    print("For n_clusters={0}, the silhouette score is {1}".format(num_cluster, silhouette_avg2))
