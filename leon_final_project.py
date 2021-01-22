@@ -387,3 +387,8 @@ worst_top10 = data[data['hierarcical_cluster_labels'] ==0].sort_values(by =['gdp
 
 print("Countries that have the worst conditions after the hierarcical clustering: ")
 print(worst_top10)
+
+#-----------------------------CHECKING THE SOCIOECONOMIC SCORES GROWTH AFTER YEARS-----------------------
+
+#Getting the SES data
+year_data = pd.read_csv("GLOB.SES.csv",encoding='ISO-8859-1')
