@@ -121,6 +121,7 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 
 inertia_list = []
+cluster_labels=[]
 
 num_clusters = [2, 3, 4, 5, 6, 7, 8]
 
@@ -129,6 +130,9 @@ for num_cluster in num_clusters:
     kmeans.fit(data_scaled)
     
     inertia_list.append(kmeans.inertia_)
+    cluster_labels = kmeans.labels_
+    silhouette_avg = silhouette_score(data_scaled, cluster_labels)
+    print("For n_clusters={0}, the silhouette score is {1}".format(num_cluster, silhouette_avg))
 
 df_inertia = pd.DataFrame(inertia_list)
 df_inertia.columns = ['Inertia']
