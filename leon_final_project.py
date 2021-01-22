@@ -336,3 +336,28 @@ plotdata3.plot(kind='bar', stacked=True,figsize=(10,10),edgecolor=None,color=['p
 plt.legend(loc='upper left')
 plt.savefig('stacked2.pdf')
 plt.close()
+
+
+#----------------------------Printing the top 10 undeveloped countries----------------------------------
+
+cluster_km=data[data['kmeans_4cluster_labels']==3]
+cluster_km.sort_values(['gdpp','income','child_mort','health','inflation','life_expec','total_fer','imports','exports'], 
+                      ascending=[True,True,False,True,False,True,False,False,True],inplace=True)
+
+
+final_data=cluster_km.head(10).drop(['kmeans_3cluster_labels','kmeans_4cluster_labels','kmeans_5cluster_labels'],axis = 1)
+
+print("Countries that have the worst conditions after the kMeans clustering: ")
+print(final_data)
+
+print("Country that has the best conditions after the kMeans clustering: ")
+print(data[data['kmeans_4cluster_labels']==2])
+
+
+sns.scatterplot(x='income', y='child_mort', hue='country',
+                data=final_data, legend='full', palette="tab10", s=300)
+
+sns.set(rc={'figure.figsize':(8,8)})
+plt.savefig('top10.pdf')
+plt.close()
+
