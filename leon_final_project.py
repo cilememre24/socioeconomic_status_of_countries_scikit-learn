@@ -422,9 +422,8 @@ for num_cluster in num_clusters2:
 
     silhouette_avg2 = silhouette_score(last_recent_data, cluster_labels2)
     print("For n_clusters={0}, the silhouette score is {1}".format(num_cluster, silhouette_avg2))
-    
-    
- print("-------------------------------------------------")
+       
+print("-------------------------------------------------")
 print("Socioeconomic scores growth and k-means clusters of the top 10 underdeveloped countries: ")
 
 ses_kmeans_4cluster = KMeans(n_clusters=6, init='k-means++', random_state= 42).fit(last_recent_data)
