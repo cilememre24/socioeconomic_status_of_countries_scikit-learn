@@ -150,9 +150,49 @@ print("--------------------------")
 kmeans_3cluster = KMeans(n_clusters=3, init='k-means++', random_state=42).fit(data_scaled)
 data['kmeans_3cluster_labels'] = kmeans_3cluster.labels_
 
+#counting the number of the countries in each cluster
+count0=0
+count1=0
+count2=0
+
+for label in kmeans_3cluster.labels_:
+    if(label==0):
+        count0+=1
+    elif(label==1):
+        count1+=1
+    else:
+        count2+=1
+    
+print("0. cluster:",count0)
+print("1.cluster:",count1)
+print("2. cluster:",count2)
 
 sns.scatterplot(x='income', y='child_mort', hue='kmeans_3cluster_labels',data=data, legend='full', palette="flare",s=100,alpha=0.7)
 plt.savefig('3cluster.pdf')
 plt.close()
 
 print("--------------------------")
+
+#------------------------kMeans with 4 cluster----------------------------
+
+kmeans_4cluster = KMeans(n_clusters=4, init='k-means++', random_state= 42).fit(data_scaled)
+data['kmeans_4cluster_labels'] = kmeans_4cluster.labels_
+
+
+sns.scatterplot(x='income', y='child_mort', hue='kmeans_4cluster_labels',data=data, legend='full', palette="flare",s=100,alpha=0.7)
+plt.savefig('4cluster.pdf')
+plt.close()
+
+print("--------------------------")
+
+#-----------------------------------kMeans with 5 cluster--------------------------------------
+
+kmeans_5cluster = KMeans(n_clusters=5, init='k-means++', random_state= 42).fit(data_scaled)
+data['kmeans_5cluster_labels'] = kmeans_5cluster.labels_
+
+
+sns.scatterplot(x='income', y='child_mort', hue='kmeans_5cluster_labels',data=data, legend='full', palette="flare",s=100,alpha=0.7)
+plt.savefig('5cluster.pdf')
+plt.close()
+
+
