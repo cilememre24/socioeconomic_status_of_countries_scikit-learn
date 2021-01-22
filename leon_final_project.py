@@ -56,3 +56,11 @@ for ax in fig.axes:
 plt.tight_layout()
 plt.savefig("worst_condition.pdf")
 plt.close()
+
+
+#-------------Plotting the Heatmap to see the correlations between variables---------------
+
+plt.figure(figsize = (8,6))  
+sns.heatmap(data.corr(),annot = True,cmap="Purples")
+plt.savefig("heatmap.pdf")
+plt.close()
