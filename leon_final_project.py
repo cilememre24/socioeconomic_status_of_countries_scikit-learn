@@ -395,10 +395,6 @@ year_data = pd.read_csv("GLOB.SES.csv",encoding='ISO-8859-1')
 
 recent_data = year_data.loc[year_data["year"]==2010]
 
-
-
-
-
 growth = []
 for i in recent_data["country"]:
     lowest = year_data[year_data['country']==i].nsmallest(1, "SES")["SES"].values
@@ -407,6 +403,13 @@ for i in recent_data["country"]:
     
 growth = np.array(growth, dtype=float)
 recent_data["SES Growth"] = growth
+
+
+worst_country_list=["Burundi","Liberia","Congo, Dem Rep","Niger","Sierra Leone","Madagascar","Mozambique","Central African Republic","Malawi","Eritrea"]
+
+last_recent_data=recent_data.drop(['unid', 'wbid','year','SES','gdppc','yrseduc','popshare'], axis=1)
+last_recent_data=last_recent_data.drop(['country'],axis=1)
+
 
 cluster_labels2=[]
 num_clusters2 = [2, 3, 4, 5, 6, 7, 8]
@@ -419,3 +422,20 @@ for num_cluster in num_clusters2:
 
     silhouette_avg2 = silhouette_score(last_recent_data, cluster_labels2)
     print("For n_clusters={0}, the silhouette score is {1}".format(num_cluster, silhouette_avg2))
+    
+    
+ print("-------------------------------------------------")
+print("Socioeconomic scores growth and k-means clusters of the top 10 underdeveloped countries: ")
+
+ses_kmeans_4cluster = KMeans(n_clusters=6, init='k-means++', random_state= 42).fit(last_recent_data)
+recent_data['ses_kmeans_4cluster'] = ses_kmeans_4cluster.labels_
+
+recent_data=recent_data.drop(['unid', 'wbid','year','SES','gdppc','yrseduc','popshare'], axis=1)
+
+worst_ses=pd.DataFrame()
+for i in worst_country_list:
+    worst_ses = worst_ses.append(recent_data.loc[recent_data["country"]==i], ignore_index=True)
+
+print(worst_ses)
+
+print("--------------------------------------------------------")
