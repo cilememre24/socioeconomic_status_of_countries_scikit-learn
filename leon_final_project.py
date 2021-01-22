@@ -68,3 +68,13 @@ plt.close()
 #----------------Making import export and healt values looking like gdpp values, not percentage-----------------
 for i in ['imports','exports','health']:
     data[i] = (data[i] * data['gdpp'])/100
+    
+    
+#Standard scaler
+
+from sklearn.preprocessing import StandardScaler
+
+new_df = data[data.columns[data.dtypes != 'object']]
+
+scaler = StandardScaler()
+data_scaled = pd.DataFrame(scaler.fit_transform(new_df))
