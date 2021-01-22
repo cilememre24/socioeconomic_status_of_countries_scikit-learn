@@ -374,3 +374,16 @@ plt.xlabel('Country',fontsize=20)
 plt.ylabel('Values',fontsize=20)
 plt.savefig('hierarchical.pdf')
 plt.close()
+
+cluster_labels = cut_tree(mergings, n_clusters=6).reshape(-1, )
+data['hierarcical_cluster_labels'] = cluster_labels
+
+sns.scatterplot(x='income', y='child_mort', hue='hierarcical_cluster_labels',data=data, legend='full', palette="flare",s=100,alpha=0.7)
+plt.savefig('hierarchical_6_cluster.pdf')
+plt.close()
+
+worst_top10 = data[data['hierarcical_cluster_labels'] ==0].sort_values(by =['gdpp','income','child_mort','health','inflation','life_expec','total_fer','imports','exports'], 
+                      ascending=[True,True,False,True,False,True,False,False,True]) .head(10)
+
+print("Countries that have the worst conditions after the hierarcical clustering: ")
+print(worst_top10)
