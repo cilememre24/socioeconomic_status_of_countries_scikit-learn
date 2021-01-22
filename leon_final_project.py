@@ -278,4 +278,49 @@ ax1.axis('equal')
 plt.savefig('pie_chart.pdf')
 plt.close()
                
+#---------------------------This lists hold the mean values of every criteria for 3 cluster-----------------------------
 
+analysis.drop([2],axis=0, inplace= True)
+
+child_mort_list=[]
+exports_list=[]
+health_list=[]
+imports_list=[]
+income_list=[]
+inflation_list=[]
+life_expec_list=[]
+total_fer_list=[]
+gdpp_list=[]
+
+for i in analysis["child_mort"]:
+    child_mort_list.append(i)
+for i in analysis["exports"]:
+    exports_list.append(i)
+for i in analysis["health"]:
+    health_list.append(i)
+for i in analysis["imports"]:
+    imports_list.append(i)
+for i in analysis["income"]:
+    income_list.append(i)
+for i in analysis["inflation"]:
+    inflation_list.append(i)
+for i in analysis["life_expec"]:
+    life_expec_list.append(i)
+for i in analysis["total_fer"]:
+    total_fer_list.append(i)
+for i in analysis["gdpp"]:
+    gdpp_list.append(i)    
+    
+#--------------------------------------STACKED BAR PLOT------------------------------------
+
+plotdata1 = pd.DataFrame({
+    "child_mort":child_mort_list,
+    "inflation":inflation_list,
+    "life_expec":life_expec_list,
+    "total_fer":total_fer_list}, 
+    index=["Cluster 0", "Cluster 1","Cluster3"])
+
+plotdata1.plot(kind='bar', stacked=True,figsize=(10,10),color=['palevioletred', 'darkseagreen','teal', 'coral'])
+plt.legend(loc='upper left')
+plt.savefig('stacked1.pdf')
+plt.close()
