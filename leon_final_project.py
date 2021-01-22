@@ -144,3 +144,15 @@ plt.savefig('inertia.pdf')
 plt.close()
 
 print("--------------------------")
+
+#------------------------------kMeans with 3 cluster---------------------
+
+kmeans_3cluster = KMeans(n_clusters=3, init='k-means++', random_state=42).fit(data_scaled)
+data['kmeans_3cluster_labels'] = kmeans_3cluster.labels_
+
+
+sns.scatterplot(x='income', y='child_mort', hue='kmeans_3cluster_labels',data=data, legend='full', palette="flare",s=100,alpha=0.7)
+plt.savefig('3cluster.pdf')
+plt.close()
+
+print("--------------------------")
