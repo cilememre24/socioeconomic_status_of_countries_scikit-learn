@@ -324,3 +324,15 @@ plotdata1.plot(kind='bar', stacked=True,figsize=(10,10),color=['palevioletred', 
 plt.legend(loc='upper left')
 plt.savefig('stacked1.pdf')
 plt.close()
+
+plotdata3 = pd.DataFrame({
+    "income":income_list,
+    "gdpp":gdpp_list, 
+    "exports_list":exports_list,
+    "imports":imports_list},
+    index=["Cluster 0", "Cluster 1","Cluster3"])
+
+plotdata3.plot(kind='bar', stacked=True,figsize=(10,10),edgecolor=None,color=['palevioletred', 'darkseagreen','teal', 'coral'])
+plt.legend(loc='upper left')
+plt.savefig('stacked2.pdf')
+plt.close()
