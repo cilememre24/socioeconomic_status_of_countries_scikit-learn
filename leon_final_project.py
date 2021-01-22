@@ -258,5 +258,24 @@ print("--------------------------")
 
 analysis =  data.groupby(['kmeans_4cluster_labels']).mean()
 analysis.drop(['kmeans_3cluster_labels','kmeans_5cluster_labels'],axis=1, inplace= True)
+
+analysis['Number of countries']=data.groupby('kmeans_4cluster_labels')['country'].count()
+print(analysis)
+
+analysis['Percentage']=round((analysis['Number of countries']) / (analysis['Number of countries'].sum()),2)
+
+
+#-----------------------------PIE CHART-------------------------------------------
+
+labels = 'Cluster 0', 'Cluster 1', 'Cluster 2','Cluster 3'
+sizes = analysis['Percentage']
+colors = ["navajowhite","salmon","mediumvioletred","rebeccapurple"]
+
+fig1, ax1 = plt.subplots()
+ax1.pie(sizes, labels=labels, autopct='%1.1f%%',shadow=True,colors=colors, startangle=90)
+
+ax1.axis('equal') 
+plt.savefig('pie_chart.pdf')
+plt.close()
                
 
