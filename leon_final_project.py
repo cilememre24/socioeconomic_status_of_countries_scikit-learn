@@ -445,3 +445,26 @@ print("These countries have the highest socioeconomic scores growth: ")
 print(recent_data.sort_values(by="SES Growth",ascending=False).head(7))
 
 print("------------------------------------------------------------")
+
+print("Is there a country you wonder about its level of development?")
+
+select_country=str(input("Enter a valid country name (For example: China): "))
+
+index=data[data['country']==select_country].index.values
+
+for i in data['country']:
+    if(i == select_country):
+        if(data.at[index[0],'kmeans_4cluster_labels']==3):
+            print("It is in cluster 3. It is a underdeveloped country.")
+        elif(data.at[index[0],'kmeans_4cluster_labels']==1):
+            print("It is in cluster 1. It is a developed country.")
+        elif(data.at[index[0],'kmeans_4cluster_labels']==0):
+            print("It is in cluster 0. It is a developing country.")
+        else:
+            print("It is in cluster 2. It is a developed country.")
+            
+country_list=[]
+for i in data['country']:
+    country_list.append(i)
+if select_country not in country_list:
+    print("There is no country like that.")
