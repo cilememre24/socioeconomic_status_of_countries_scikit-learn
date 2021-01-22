@@ -178,6 +178,27 @@ print("--------------------------")
 kmeans_4cluster = KMeans(n_clusters=4, init='k-means++', random_state= 42).fit(data_scaled)
 data['kmeans_4cluster_labels'] = kmeans_4cluster.labels_
 
+#counting the number of the countries in each cluster
+
+count0=0
+count1=0
+count2=0
+count3=0
+
+for label in kmeans_4cluster.labels_:
+    if(label==0):
+        count0+=1
+    elif(label==1):
+        count1+=1
+    elif(label==2):
+        count2+=1
+    else:
+        count3+=1
+    
+print("0. cluster:",count0)
+print("1. cluster:",count1)
+print("2. cluster:",count2)
+print("3. cluster:",count3)
 
 sns.scatterplot(x='income', y='child_mort', hue='kmeans_4cluster_labels',data=data, legend='full', palette="flare",s=100,alpha=0.7)
 plt.savefig('4cluster.pdf')
@@ -190,9 +211,52 @@ print("--------------------------")
 kmeans_5cluster = KMeans(n_clusters=5, init='k-means++', random_state= 42).fit(data_scaled)
 data['kmeans_5cluster_labels'] = kmeans_5cluster.labels_
 
+#counting the number of the countries in each cluster
+
+count0=0
+count1=0
+count2=0
+count3=0
+count4=0
+
+for label in kmeans_5cluster.labels_:
+    if(label==0):
+        count0+=1
+    elif(label==1):
+        count1+=1
+    elif(label==2):
+        count2+=1
+    elif(label==3):
+        count3+=1
+    else:
+        count4+=1
+    
+print("0. cluster:",count0)
+print("1. cluster:",count1)
+print("2. cluster:",count2)
+print("3. cluster:",count3)
+print("4. cluster:",count4)
 
 sns.scatterplot(x='income', y='child_mort', hue='kmeans_5cluster_labels',data=data, legend='full', palette="flare",s=100,alpha=0.7)
 plt.savefig('5cluster.pdf')
 plt.close()
 
+#WE DECIDED 4 CLUSTER
+
+#-------------------------------INCOME-OTHER-----------------------------------
+
+x1 =sns.pairplot(data, palette='flare', x_vars=['gdpp','exports','health','imports'], y_vars=['income'] ,diag_kind = None, hue='kmeans_4cluster_labels')
+plt.savefig('income_other1.pdf')
+plt.close()
+x2 =sns.pairplot(data, palette='flare', x_vars=['child_mort','inflation','life_expec','total_fer'], y_vars=['income'] ,diag_kind = None, hue='kmeans_4cluster_labels' )
+plt.savefig('income_other2.pdf')
+plt.close()
+
+#------------------------------------------------------------------------------
+
+print("--------------------------")
+
+analysis =  data.groupby(['kmeans_4cluster_labels']).mean()
+analysis.drop(['kmeans_3cluster_labels','kmeans_5cluster_labels'],axis=1, inplace= True)
+               
 
