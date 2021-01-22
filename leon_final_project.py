@@ -114,3 +114,29 @@ def hopkins(X):
 print("------------------------")
 print("Hopkins score:",hopkins(new_df))
 print("------------------------")
+
+#---------------Finding the optimum number of Clusters - Elbow Curve-------------------------
+
+from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
+
+inertia_list = []
+
+num_clusters = [2, 3, 4, 5, 6, 7, 8]
+
+for num_cluster in num_clusters:
+    kmeans = KMeans(n_clusters=num_cluster,max_iter=50)
+    kmeans.fit(data_scaled)
+    
+    inertia_list.append(kmeans.inertia_)
+
+df_inertia = pd.DataFrame(inertia_list)
+df_inertia.columns = ['Inertia']
+
+plt.plot(num_clusters, df_inertia['Inertia'], 'bx-',color='purple')
+
+plt.title('Inertia/Elbow Curve')
+plt.savefig('inertia.pdf')
+plt.close()
+
+print("--------------------------")
