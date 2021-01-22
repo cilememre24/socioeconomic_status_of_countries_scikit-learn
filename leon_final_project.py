@@ -439,3 +439,9 @@ for i in worst_country_list:
 print(worst_ses)
 
 print("--------------------------------------------------------")
+
+print("These countries have the highest socioeconomic scores growth: ")
+
+print(recent_data.sort_values(by="SES Growth",ascending=False).head(7))
+
+print("------------------------------------------------------------")
